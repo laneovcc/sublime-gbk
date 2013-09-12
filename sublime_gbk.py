@@ -8,11 +8,11 @@ def gbk2utf8(view):
         reg_all = sublime.Region(0, view.size())
         gbk = view.substr(reg_all).encode('gbk')
     except:
-        gbk = file(view.file_name()).read()
+        gbk = file(view.file_name(),'rb').read()
         text = gbk.decode('gbk')
 
         tmp_file = u"%s.dump"%view.file_name()
-        f = file(tmp_file, 'w')
+        f = file(tmp_file, 'wb')
         f.write(text.encode('utf8'))
         f.close()
 
@@ -33,7 +33,7 @@ def saveWithEncoding(view, file_name = None, encoding = 'gbk'):
         file_name = view.file_name()
     reg_all = sublime.Region(0, view.size())
     text = view.substr(reg_all).encode(encoding)
-    gbk = file(file_name, 'w')
+    gbk = file(file_name, 'wb')
     gbk.write(text)
     gbk.close()    
 
